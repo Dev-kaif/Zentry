@@ -3,27 +3,34 @@ import { TiLocationArrow } from "react-icons/ti";
 import Button from "./Button";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/all";
+gsap.registerPlugin(ScrollTrigger);
 
 const Hero = () => {
-  const [currentIndex, setcurrentIndex] = useState(1);
-  const [hasClicked, sethasClicked] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-  const [loaddedVideos, setloaddedVideos] = useState(0);
 
-  const totalVideo = 3;
+  const [currentIndex, setcurrentIndex] = useState(1);
+
+  const totalVideo = 4;
   const nextVideoRef = useRef(null);
 
+  const getVideoSrc = (index) => `../../public/videos/hero-${index}.mp4`;
+
   const upCommingVideoindex = (currentIndex % totalVideo) + 1;
+
+  const [hasClicked, sethasClicked] = useState(false);
+
   const handleMiniVideoClick = () => {
     sethasClicked(true);
     setcurrentIndex(upCommingVideoindex);
   };
 
+  const [isLoading, setIsLoading] = useState(true);
+  const [loaddedVideos, setloaddedVideos] = useState(0);
+
   const handleVieoLoad = () => {
     setloaddedVideos((prev) => prev + 1);
   };
 
-  const getVideoSrc = (index) => `../../public/videos/hero-${index}.mp4`;
 
   useEffect(() => {
     // if loaddedvideos all videos are loadded remove the loading screen
@@ -31,6 +38,9 @@ const Hero = () => {
       setIsLoading(false);
     }
   }, [loaddedVideos]); //use effect is trigerred if loadedvideos change
+
+
+
 
   useGSAP(
     () => {
@@ -59,6 +69,27 @@ const Hero = () => {
   );
   //whenevr the current index changes the animation triggers
 
+  useGSAP(() => {
+    gsap.set("#video-frame", {
+      clipPath: "polygon(14% 0%, 72% 0, 90% 90%, 0% 100%)",
+      borderRadius:"0 0 40% 10%"
+    });
+
+    gsap.from("#video-frame",{
+      clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+      borderRadius:"0 0 0 0 ",
+      ease: 'power1.inOut',
+      scrollTrigger:{
+        trigger: '#video-frame',
+        start:'center center',
+        end: 'bottom center',
+        scrub:'true'
+      }
+    })
+  });
+
+
+  
   return (
     <div className="relative h-dvh w-screen overflow-x-hidden">
       {/* Loading Screen */}
@@ -134,11 +165,28 @@ const Hero = () => {
           <h1 className="z-40 text-blue-75  absolute bottom-5 right-5">
             G<b>a</b>ming
           </h1>
-          {/* copy of same text at some posotion but at diffrent z-index */}
-          <h1 className=" text-black absolute bottom-5 right-5">
-            G<b>a</b>ming
-          </h1>
         </div>
+      </div>
+      {/* copy of same text at some posotion but at diffrent z-index */}
+      <div className="absolute left-0 top-0 size-full">
+          <div className="mt-24 px-5 sm:px-10">
+            <h1 className="special-font hero-heading text-black">
+              Redefi<b>n</b>e
+            </h1>
+            <p className="mb-5 max-w-64 font-robert-regular text-black">
+              Enter the Metagame Layer <br /> Unleash the Play Economy
+            </p>
+            {/* adding "!" infont of class makes it importangt and gives more priority */}
+            <Button
+              id="watch-trailer"
+              title="Watch Trailer"
+              containerClass="!bg-yellow-300 flex-center gap-1"
+              leftIcon={<TiLocationArrow />}
+            />
+          </div>
+        </div>
+      <div className=" special-font hero-heading text-black absolute bottom-5 right-5">
+        G<b>a</b>ming
       </div>
     </div>
   );
