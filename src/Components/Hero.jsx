@@ -1,4 +1,8 @@
 import React, { useRef, useState } from "react";
+import { TiLocationArrow } from "react-icons/ti";
+import Button from "./Button";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 
 const Hero = () => {
   const [currentIndex, setcurrentIndex] = useState(1);
@@ -20,6 +24,33 @@ const Hero = () => {
   };
 
   const getVideoSrc = (index) => `../../public/videos/hero-${index}.mp4`;
+
+  useGSAP(
+    () => {
+      if (hasClicked) {
+        gsap.set("#next-video", {
+          visibility: "visible",
+        });
+        gsap.to("#next-video", {
+          transformOrigin: "center center",
+          scale: 1,
+          width: "100%",
+          height: "100%",
+          duration: 1,
+          ease: "power1.inOut",
+          onStart: () => nextVideoRef.current.play(),
+        });
+        gsap.from("#current-video", {
+          transformOrigin: "center center",
+          scale: 0,
+          duration: 1.5,
+          ease: "power1.inOut",
+        });
+      }
+    },
+    { dependencies: [currentIndex], revertOnUpdate: true }
+  );
+  //whenevr the current index changes the animation triggers
 
   return (
     <div className="relative h-dvh w-screen overflow-x-hidden">
@@ -45,6 +76,7 @@ const Hero = () => {
               />
             </div>
           </div>
+          {/* keep the video invisible we make it visible with gsap for animation effect */}
           <video
             loop
             muted
@@ -54,25 +86,40 @@ const Hero = () => {
             src={getVideoSrc(currentIndex)}
           />
           <video
-          src={getVideoSrc(currentIndex=== totalVideo-1? 1:currentIndex)}
-          loop 
-          muted 
-          autoPlay
-        className="absolute left-0 top-0 size-full object-cover object-center" 
-        onLoadedData={handleVieoLoad}
+            src={getVideoSrc(currentIndex)}
+            loop
+            muted
+            autoPlay
+            className="absolute left-0 top-0 size-full object-cover object-center"
+            // 
+            onLoadedData={handleVieoLoad}
           />
         </div>
-        <h1 className="special-font hero-heading absolute bottom-5 right-5 z-40 text-blue-75">
-            G<b>a</b>ming
-        </h1>
         <div className="absolute left-0 top-0 z-40 size-full">
-            <div className="mt-24 px-5 sm:px-10">
-                <h1 className="special-font hero-heading text-blue-100">Redefi<b>n</b>e</h1>
-
-                <p className="mb-5 max-w-64 font-robert-regular text-blue-100">
-                    Enter the Metagame Layer <br /> Unleash the Play Economy
-                </p>
-            </div>
+          <div className="mt-24 px-5 sm:px-10">
+            <h1 className="special-font hero-heading text-blue-100">
+              Redefi<b>n</b>e
+            </h1>
+            <p className="mb-5 max-w-64 font-robert-regular text-blue-100">
+              Enter the Metagame Layer <br /> Unleash the Play Economy
+            </p>
+            {/* adding "!" infont of class makes it importangt and gives more priority */}
+            <Button
+              id="watch-trailer"
+              title="Watch Trailer"
+              containerClass="!bg-yellow-300 flex-center gap-1"
+              leftIcon={<TiLocationArrow />}
+            />
+          </div>
+        </div>
+        <div className="special-font hero-heading">
+          <h1 className="z-40 text-blue-75  absolute bottom-5 right-5">
+            G<b>a</b>ming
+          </h1>
+          {/* copy of same text at some posotion but at diffrent z-index */}
+          <h1 className=" text-black absolute bottom-5 right-5">
+            G<b>a</b>ming
+          </h1>
         </div>
       </div>
     </div>
