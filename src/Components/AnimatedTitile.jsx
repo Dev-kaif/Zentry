@@ -1,5 +1,4 @@
-import React, { useRef } from "react";
-import { useEffect } from "react";
+import { useRef , useEffect} from "react";
 import clsx from "clsx"; // Utility for conditional class names
 import gsap from "gsap"; 
 import { ScrollTrigger } from "gsap/all";
