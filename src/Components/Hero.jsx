@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { TiLocationArrow } from "react-icons/ti";
 import Button from "./Button";
 import { useGSAP } from "@gsap/react";
@@ -24,6 +24,13 @@ const Hero = () => {
   };
 
   const getVideoSrc = (index) => `../../public/videos/hero-${index}.mp4`;
+
+  useEffect(() => {
+    // if loaddedvideos all videos are loadded remove the loading screen
+    if (loaddedVideos === totalVideo - 1) {
+      setIsLoading(false);
+    }
+  }, [loaddedVideos]); //use effect is trigerred if loadedvideos change
 
   useGSAP(
     () => {
@@ -54,6 +61,17 @@ const Hero = () => {
 
   return (
     <div className="relative h-dvh w-screen overflow-x-hidden">
+      {/* Loading Screen */}
+      {isLoading && (
+        <div className="flex justify-center items-center absolute z-[100] h-dvh w-screen overflow-hidden bg-violet-500">
+          <div className="three-body">
+            <div className="three-body__dot"></div>
+            <div className="three-body__dot"></div>
+            <div className="three-body__dot"></div>
+          </div>
+        </div>
+      )}
+
       <div
         id="video-frame"
         className="relative z-10 h-dvh w-screen overflow-hidden rounded-lg bg-blue-75"
@@ -91,7 +109,7 @@ const Hero = () => {
             muted
             autoPlay
             className="absolute left-0 top-0 size-full object-cover object-center"
-            // 
+            //
             onLoadedData={handleVieoLoad}
           />
         </div>
