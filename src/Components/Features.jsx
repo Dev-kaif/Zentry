@@ -1,7 +1,6 @@
-import React from "react";
 import BentoCard from "./BentoCard";
 import Tilt from "react-parallax-tilt";
-import { TiLocation, TiLocationArrow } from "react-icons/ti";
+import {  TiLocationArrow } from "react-icons/ti";
 
 const BentoTilt = ({ children, className }) => {
   return (
