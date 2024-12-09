@@ -1,4 +1,3 @@
-import React from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
@@ -24,14 +23,33 @@ const About = () => {
       borderRadius: 0,
     });
   });
+
+  useGSAP(() => {
+    const scrollAnimation = gsap.timeline({
+      scrollTrigger: {
+        trigger: "#about",
+        start: "center center",
+        end: "+=1000 center",
+        scrub: 0.5,
+      },
+    });
+
+    scrollAnimation.to("#about", {
+      backgroundColor: "black",
+    });
+  });
+
   return (
-    <div id="about" className="min-h-screen w-screen">
+    <div id="about" className=" w-screen bg-blue-50">
       <div className="relative mb-8 mt-36 flex flex-col items-center gap-5">
         <h2 className="font-general text-sm uppercase md:text-[10px]">
           Welcome to Zentry
         </h2>
 
-        <AnimatedTitile title="Disc<b>o</b>ver the world's <br /> l<b>a</b>rgest shared adve<b>n</b>ture" containerClass="mt-5 !text-black text-center" />
+        <AnimatedTitile
+          title="Disc<b>o</b>ver the world's <br /> l<b>a</b>rgest shared adve<b>n</b>ture"
+          containerClass="mt-5 !text-black text-center"
+        />
 
         <div className="about-subtext">
           <p>The Game of Games begins-your life, now an epic MMORPFG</p>
@@ -42,13 +60,14 @@ const About = () => {
       </div>
 
       <div className="h-dvh w-screen" id="clip">
-        <div className="mask-clip-path about-image">
-          <img
-            src="img/about.webp"
-            alt="Background"
-            className="absolute left-0 top-0 size-full object-cover"
-          />
-        </div>
+
+          <div className="mask-clip-path about-image transition">
+            <img
+              src="img/about.webp"
+              alt="Background"
+              className="absolute left-0 top-0 size-full object-cover"
+            />
+          </div>
       </div>
     </div>
   );
