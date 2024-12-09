@@ -15,6 +15,7 @@ function App() {
       <Features/>
       <Story />
       <Contact/>
+      <Footer/>
     </div>
   )
 }
