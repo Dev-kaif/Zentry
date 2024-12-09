@@ -1,13 +1,14 @@
 import React from "react";
 import BentoCard from "./BentoCard";
 import Tilt from "react-parallax-tilt";
+import { TiLocation, TiLocationArrow } from "react-icons/ti";
 
 const BentoTilt = ({ children, className }) => {
   return (
     <Tilt
       tiltMaxAngleY={8}
       tiltMaxAngleX={8}
-      scale={0.98}
+      scale={0.96}
       perspective={1000}
       reset={true}
       className={`${className} cursor-grabbing transition duration-300`}
@@ -89,17 +90,21 @@ const Features = () => {
             />
           </BentoTilt>
           <BentoTilt className="bento-tilt_2">
-            <BentoCard
-              title={
-                <>
-                  M<b>o</b>re <br /> Com<b>m</b>ing <br /> so<b>o</b>n.
-                </>
-              }
-              color
-            />
+            <div className="flex size-full flex-col justify-between bg-violet-300 p-5">
+              <div className="bento-title special-font max-w-64 text-black">
+                M<b>o</b>re <br /> Com<b>m</b>ing <br /> so<b>o</b>n.
+              </div>
+              <TiLocationArrow className="m-5 scale-[5] self-end"/>
+            </div>
           </BentoTilt>
           <BentoTilt className="bento-tilt_2">
-            <video className=" size-full object-cover object-center" autoPlay muted loop src="videos/feature-5.mp4" />
+            <video
+              className=" size-full object-cover object-center"
+              autoPlay
+              muted
+              loop
+              src="videos/feature-5.mp4"
+            />
           </BentoTilt>
         </div>
       </div>
@@ -108,4 +113,3 @@ const Features = () => {
 };
 
 export default Features;
-

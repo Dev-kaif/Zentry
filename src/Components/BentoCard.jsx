@@ -1,9 +1,12 @@
 import React from 'react';
+import Button from './Button';
+import { TiLocationArrow } from "react-icons/ti";
+
 
 const BentoCard = ({src,title,description,cover,color}) => {
   return (
     
-    <div className={`relative size-full ${color && "bg-violet-300"}`}>
+    <div className={`relative size-full`}>
         <video src={src}
         autoPlay
         loop
@@ -14,10 +17,10 @@ const BentoCard = ({src,title,description,cover,color}) => {
             <div>
                 <h1 className='bento-title special-font'>{title}</h1>
                 {description && (
-                    <p className='mt-3 max-w-64 text-xs md:text-base '>{description}</p>
+                    <p className='mt-3 max-w-64 text-xs md:text-base  '>{description}</p>
                 )}
             </div>
-            {color && ("")}
+            <Button containerClass={"!bg-black text-[#dadada7a] flex gap-2 border-2 border-[#dadada7a]"} rightIcon={<TiLocationArrow />} title={"Comming Soon"}/>
         </div>
     </div>
   )
