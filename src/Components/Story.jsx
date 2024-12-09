@@ -1,9 +1,39 @@
-import React from "react";
-import AnimatedTitile from "./AnimatedTitile";
 import Tilt from "react-parallax-tilt";
 import Button from "./Button";
+import AnimatedTitile from "./AnimatedTitile";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/all";
+gsap.registerPlugin(ScrollTrigger);
 
 const Story = () => {
+
+  useGSAP(() => {
+    const scrollAnimation = gsap.timeline({
+      scrollTrigger: {
+        trigger: "#story",
+        start: "bottom bottom",
+        end: "bottom top",
+        scrub: 1,
+      },
+    });
+
+    scrollAnimation.to("#story", {
+      backgroundColor: "#dfdff0",
+      color: "black",
+      duration: 0.5,
+      ease: "power2.inOut",
+    });
+
+    scrollAnimation.to("p,#realm-btn", {
+      opacity: 0,
+      y: 20,
+      duration: 0.5,
+      ease: "power2.out",
+    }, "-=0.5");
+  });
+
+
   return (
     <div id="story" className="min-h-dvh w-screen bg-black text-blue-50">
       <div className="flex size-full flex-col items-center py-10 pb-24">
