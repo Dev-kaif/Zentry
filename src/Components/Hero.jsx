@@ -44,7 +44,7 @@ const Hero = () => {
 
   // Effect to remove the loading screen once all videos are loaded
   useEffect(() => {
-    if (loaddedVideos === 1) {
+    if (loaddedVideos === totalVideo - 2) {
       setIsLoading(false); // Hide the loading screen
     }
   }, [loaddedVideos]); // Dependency: triggers when 'loaddedVideos' changes
