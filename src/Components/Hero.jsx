@@ -49,6 +49,19 @@ const Hero = () => {
     }
   }, [loaddedVideos]); // Dependency: triggers when 'loaddedVideos' changes
 
+
+  // Lock and unlock scroll based on loading state
+  useEffect(() => {
+    if (isLoading) {
+      document.body.style.overflow = "hidden"; // Disable scroll
+    } else {
+      document.body.style.overflow = ""; // Enable scroll
+    }
+    return () => {
+      document.body.style.overflow = ""; // Cleanup in case the component unmounts
+    };
+  }, [isLoading]);
+
   // GSAP animation triggered when the video index changes
   useGSAP(
     () => {
