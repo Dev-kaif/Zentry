@@ -20,7 +20,7 @@ const BentoCard = ({src,title,description,cover,color}) => {
                     <p className='mt-3 max-w-64 text-xs md:text-base  '>{description}</p>
                 )}
             </div>
-            <Button containerClass={"!bg-black text-[#dadada7a] flex gap-2 border-2 border-[#dadada7a]"} rightIcon={<TiLocationArrow />} title={"Comming Soon"}/>
+            <Button containerClass={"!bg-black !text-[#dadada7a] flex gap-2 border-2 border-[#dadada7a]"} rightIcon={<TiLocationArrow />} title={"Comming Soon"}/>
         </div>
     </div>
   )
