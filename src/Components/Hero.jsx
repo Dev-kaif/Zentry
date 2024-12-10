@@ -43,11 +43,11 @@ const Hero = () => {
   };
 
   // Effect to remove the loading screen once all videos are loaded
-  useEffect(() => {
-    if (loaddedVideos === 1) {
-      setIsLoading(false); // Hide the loading screen
-    }
-  }, [loaddedVideos]); // Dependency: triggers when 'loaddedVideos' changes
+  // useEffect(() => {
+  //   if (loaddedVideos === 1) {
+  //     setIsLoading(false); // Hide the loading screen
+  //   }
+  // }, [loaddedVideos]); // Dependency: triggers when 'loaddedVideos' changes
 
   // GSAP animation triggered when the video index changes
   useGSAP(
@@ -104,7 +104,7 @@ const Hero = () => {
   return (
     <div className="relative h-dvh w-screen overflow-x-hidden">
       {/* Loading Screen */}
-      {isLoading && (
+      {/* {isLoading && (
         <div className="flex justify-center items-center absolute z-[100] h-dvh w-screen overflow-hidden bg-violet-500">
           <div className="three-body">
             <div className="three-body__dot"></div>
@@ -112,7 +112,7 @@ const Hero = () => {
             <div className="three-body__dot"></div>
           </div>
         </div>
-      )}
+      )} */}
 
       <div
         id="video-frame"
